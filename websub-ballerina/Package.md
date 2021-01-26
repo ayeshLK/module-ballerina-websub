@@ -33,8 +33,6 @@ This module allows introducing a WebSub Subscriber Service with `onSubscriptionV
 
     ```ballerina
     @websub:SubscriberServiceConfig {	
-        path: "/websub",	
-        subscribeOnStartUp: true,	
         target: ["<HUB_URL>", "<TOPIC_URL>"],	
         leaseSeconds: 3600,	
         secret: "<SECRET>"	
