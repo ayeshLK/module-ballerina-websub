@@ -21,7 +21,7 @@ import ballerina/test;
 listener Listener testListener = new(9090);
 
 @SubscriberServiceConfig {
-    target: ["http://localhost:9191/websub/hub", "http://websubpubtopic.com"],
+    target: ["http://localhost:9191/websub/hub", "test"],
     leaseSeconds: 36000,
     secret: "Kslk30SNF2AChs2"
 }
@@ -76,7 +76,7 @@ function testOnIntentVerificationSuccess() returns @tainted error? {
 
     var response = check httpClient->get("/?hub.mode=subscribe&hub.topic=test&hub.challenge=1234", request);
     if (response is http:Response) {
-        test:assertEquals(response.statusCode, 200);
+        test:assertTrue(response.statusCode >= 200 && response.statusCode < 300);
         test:assertEquals(response.getTextPayload(), "1234");
     } else {
         test:assertFail("UnsubscriptionIntentVerification test failed");
